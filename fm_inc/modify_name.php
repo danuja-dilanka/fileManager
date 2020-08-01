@@ -20,5 +20,5 @@ if (isset($_POST['newFname']) && isset($_POST['theFile'])) {
         }
         $l--;
     }
-    rename(".." . $mod_path, $path . "/" . $file);
+    rename(".." . $mod_path, '..'.$path . "/" . $file);
 }

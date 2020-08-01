@@ -78,6 +78,13 @@
                     <li class="breadcrumb-item"><a href="#"><?= ($paths[$l] == '.') ? 'root' : $paths[$l] ?></a></li>
                 </ol>
             </nav>
+            <?php
+            $files = scandir($dir);
+            $file_count = 1;
+            if ($from_folder != false) {
+                ?>
+                <a href="<?= "?folder=" . $from ?>" class="btn btn-sm btn-primary m-2">Back</a>
+            <?php } ?>
         </div>
         <div class="col-sm-12 mt-1 mb-1">
             <table id="fileTable" style="width:100%">
@@ -90,17 +97,6 @@
                 </thead>
                 <tbody>
                     <?php
-                    $files = scandir($dir);
-                    $file_count = 1;
-                    if ($from_folder != false) {
-                        ?>
-                        <tr class="bg bg-light">
-                            <td><a href="<?= "?folder=" . $from ?>">...</a></td>
-                            <td>-</td>
-                            <td class="d-none d-md-block d-lg-block">-</td>
-                        </tr>
-                        <?php
-                    }
                     for ($index = 2; $index < count($files); $index++) {
                         $filePath = $dir . "/" . $files[$index];
                         $file = new file($filePath);
@@ -112,6 +108,7 @@
                                 <tr>
                                 <?php } ?>
                                 <td>
+                                    <input type="text" value="<?= $filePath ?>" id="<?= 'tr_n_path' . $file_count ?>" hidden readonly>
                                     <a id="<?= 'tr_n_' . $file_count ?>" class="fileNameLink" href="<?= (!$file->isFile) ? "?folder=" . $filePath : "#" ?>"><?= $files[$index] ?></a>
                                     <input type="text" value="<?= $files[$index] ?>" class="form-control col-sm-4 fileEditInput" data-id='<?= $file_count ?>' id="<?= 'tr_n_box_' . $file_count ?>" hidden>
                                 </td>

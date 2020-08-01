@@ -9,7 +9,7 @@ function saveAll(the_id) {
     var input_ele = $("#tr_n_box_" + the_id);
     $("#tr_n_" + the_id).show();
     input_ele.attr('hidden', 'true');
-    $.post("fm_inc/modify_name.php", {newFname: input_ele.val(), theFile: $('#tr_n_' + the_id).attr('href')}, function () {
+    $.post("fm_inc/modify_name.php", {newFname: input_ele.val(), theFile: $('#tr_n_path' + the_id).val()}, function (data) {
         $("body").load(location.href);
     });
 }
